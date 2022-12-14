@@ -46,7 +46,7 @@ function clearArticles() {
 }
 
 function addRemoveButton(hits) {
-  hits.length >= 10 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
+  hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
   if (hits.length < 1) {
     Notify.info('Sorry, there are no images matching your search query. Please try again.');
   }
