@@ -11,7 +11,7 @@
        console.log(data)
       this.page += 1;
        return data.hits
-      // це дуже важливо повертаємо дату а здати hits бо там всі дані 
+      // це дуже важливо повертаємо дату а здати hits бо там 
   })
    }
 resetPage() {

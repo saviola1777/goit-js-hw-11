@@ -1,6 +1,6 @@
 // import axios from "axios";
-// import SimpleLightbox from 'simplelightbox';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NewsApiService from './js/new-service.js'
 import { createMarkup } from "./js/card-marking.js"
@@ -15,19 +15,20 @@ const refs ={
 const newsApiService = new NewsApiService();
 
  
-// let lightbox = new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
- 
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 refs.form.addEventListener('submit', onSearch)
 refs.loadMore.addEventListener('click', onLoadMore)
 
 function onSearch(e) {
-  e.preventDefault()
-  newsApiService.query = e.currentTarget.elements.searchQuery.value.trim()
+  e.preventDefault();
+  newsApiService.query = e.currentTarget.elements.searchQuery.value.trim();
+  // refs.loadMore.classList.remove('is-hidden')
   newsApiService.resetPage()
-   clearArticles()
+  clearArticles()
   newsApiService.fetchActions().then(appendArticlesMarkup)
  }
 
@@ -36,12 +37,17 @@ newsApiService.fetchActions().then(appendArticlesMarkup)
   }
 
 function appendArticlesMarkup(hits) {
-  if (hits.length < 1) {
-    Notify.info('Sorry, there are no images matching your search query. Please try again.');
-  }
+  addRemoveButton(hits)
   refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
 }
 
 function clearArticles() {
   refs.gallery.innerHTML = '';
 }
+
+function addRemoveButton(hits) {
+  hits.length >= 10 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
+  if (hits.length < 1) {
+    Notify.info('Sorry, there are no images matching your search query. Please try again.');
+  }
+  }
