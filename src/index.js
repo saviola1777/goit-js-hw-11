@@ -1,7 +1,7 @@
-
+import {messageEmptyLine,messagenothingFound} from "./js/messageNotify.js"
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import NewsApiService from './js/new-service.js'
 import { createMarkup } from "./js/card-marking.js"
 
@@ -25,7 +25,7 @@ refs.loadMore.addEventListener('click', onLoadMore)
 function onSubmit(e) {
   e.preventDefault();
   newsApiService.query = e.currentTarget.elements.searchQuery.value.trim();
-  if (newsApiService.query === '') return  Notify.info('You have not written anything, please write what you want to find');;
+  if (newsApiService.query === '') return messageEmptyLine();
   console.log(newsApiService.query)
   newsApiService.resetPage()
   clearArticles()
@@ -47,7 +47,5 @@ function appendArticlesMarkup(hits) {
 
 function addRemoveButton(hits) {
   hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
-  if (hits.length < 1) {
-    Notify.info('Sorry, there are no images matching your search query. Please try again.');
-  }
+  if (hits.length < 1) messagenothingFound();
   }
