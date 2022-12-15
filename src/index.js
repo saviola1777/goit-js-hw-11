@@ -1,4 +1,4 @@
-// import axios from "axios";
+
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -14,18 +14,19 @@ const refs ={
 
 const newsApiService = new NewsApiService();
 
- 
 let lightbox = new SimpleLightbox('.gallery a' , {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
-refs.form.addEventListener('submit', onSearch)
+refs.form.addEventListener('submit', onSubmit)
 refs.loadMore.addEventListener('click', onLoadMore)
 
-function onSearch(e) {
+function onSubmit(e) {
   e.preventDefault();
   newsApiService.query = e.currentTarget.elements.searchQuery.value.trim();
+  if (newsApiService.query === '') return  Notify.info('You have not written anything, please write what you want to find');;
+  console.log(newsApiService.query)
   newsApiService.resetPage()
   clearArticles()
   newsApiService.fetchActions().then(appendArticlesMarkup)

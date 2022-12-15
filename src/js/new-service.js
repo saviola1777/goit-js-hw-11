@@ -13,7 +13,9 @@ async fetchActions() {
       );
       this.page += 1;
   const promiseHits = await resaultPromise.data.hits ;
+  // console.log(promiseHits)
     return promiseHits
+   
   }
 
 resetPage() {
