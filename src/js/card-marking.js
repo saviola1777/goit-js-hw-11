@@ -1,6 +1,6 @@
 
 export function createMarkup(names) {
-  return names.hits
+  return names
     .map(({  webformatURL,tags, views,likes,comments,downloads,largeImageURL, }) => {
      
       return `<div class="photo-card">
