@@ -1,19 +1,21 @@
- export default class NewsApiService {
+import axios from "axios";
+export default class NewsApiService {
    constructor() {
      this.searchQuery = '';
      this.page = 1;
+     this.URL='https://pixabay.com/api/';
+     this.API_KEY='31958740-fc1ca03b202680423fa77b228&';
     }
-   fetchActions() {
-     const url = `https://pixabay.com/api/?key=31958740-fc1ca03b202680423fa77b228&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`
-   return fetch(url)
-    .then(response => response.json())
-     .then(data => {
-       console.log(data)
+
+async fetchActions() {
+ const resaultPromise = await axios.get(
+      `${this.URL}?key=${this.API_KEY}&q=${this.query}&image_type=photo&safesearch=true&orientation=horizontal&page=${this.page}&per_page=40`
+      );
       this.page += 1;
-       return data.hits
-      // це дуже важливо повертаємо дату а здати hits бо там 
-  })
-   }
+  const promiseHits = await resaultPromise.data.hits ;
+    return promiseHits
+  }
+
 resetPage() {
 this.page = 1;
    }

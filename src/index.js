@@ -15,7 +15,7 @@ const refs ={
 const newsApiService = new NewsApiService();
 
  
-let lightbox = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a' , {
   captionsData: 'alt',
   captionDelay: 250,
 });
@@ -26,7 +26,6 @@ refs.loadMore.addEventListener('click', onLoadMore)
 function onSearch(e) {
   e.preventDefault();
   newsApiService.query = e.currentTarget.elements.searchQuery.value.trim();
-  // refs.loadMore.classList.remove('is-hidden')
   newsApiService.resetPage()
   clearArticles()
   newsApiService.fetchActions().then(appendArticlesMarkup)
@@ -41,7 +40,7 @@ function appendArticlesMarkup(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
 }
 
-function clearArticles() {
+ function clearArticles() {
   refs.gallery.innerHTML = '';
 }
 
