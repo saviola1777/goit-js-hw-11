@@ -7,7 +7,7 @@ export default class NewsApiService {
      this.API_KEY='31958740-fc1ca03b202680423fa77b228&';
     }
 
-async fetchActions() {
+async axiosActions() {
  const resaultPromise = await axios.get(
       `${this.URL}?key=${this.API_KEY}&q=${this.query}&image_type=photo&safesearch=true&orientation=horizontal&page=${this.page}&per_page=40`
       );

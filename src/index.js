@@ -1,4 +1,4 @@
-import {messageEmptyLine,messagenothingFound} from "./js/messageNotify.js"
+import { messageEmptyLine, messageNothingFound } from "./js/messageNotify.js";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
@@ -29,7 +29,7 @@ function onSubmit(e) {
   console.log(newsApiService.query)
   newsApiService.resetPage()
   clearArticles()
-  newsApiService.fetchActions().then(appendArticlesMarkup)
+  newsApiService.axiosActions().then(appendArticlesMarkup)
  }
 
 function onLoadMore() {
@@ -39,6 +39,7 @@ newsApiService.fetchActions().then(appendArticlesMarkup)
 function appendArticlesMarkup(hits) {
   addRemoveButton(hits)
   refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+  lightbox.refresh()
 }
 
  function clearArticles() {
@@ -47,5 +48,5 @@ function appendArticlesMarkup(hits) {
 
 function addRemoveButton(hits) {
   hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
-  if (hits.length < 1) messagenothingFound();
+  if (hits.length < 1) messageNothingFound();
   }

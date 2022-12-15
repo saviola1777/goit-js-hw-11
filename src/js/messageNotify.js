@@ -3,8 +3,8 @@ function messageEmptyLine() {
   Notify.info('You have not written anything, please write what you want to find')
 }
 
-function messagenothingFound() {
+function messageNothingFound() {
   Notify.info('Sorry, there are no images matching your search query. Please try again.');
 }
 
-export{messageEmptyLine,messagenothingFound}
+export{messageEmptyLine,messageNothingFound}
