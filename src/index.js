@@ -26,12 +26,11 @@ function onSubmit(e) {
   e.preventDefault();
   newsApiService.query = e.currentTarget.elements.searchQuery.value.trim();
   if (newsApiService.query === '') return messageEmptyLine();
-  console.log(newsApiService.query)
   newsApiService.resetPage()
-  clearArticles()
+  refs.gallery.innerHTML = '';
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
-    if (data.hits.length >= 40) messagetotalHits(data.totalHits);
+    if (data.hits.length >= 1) messagetotalHits(data.totalHits);
   })
  }
 
@@ -43,10 +42,6 @@ function appendArticlesMarkup(data) {
   addRemoveButton(data)
   refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
   lightbox.refresh()
-}
-
- function clearArticles() {
-  refs.gallery.innerHTML = '';
 }
 
 function addRemoveButton(data) {
