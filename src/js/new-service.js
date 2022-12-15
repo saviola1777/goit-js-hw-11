@@ -12,8 +12,8 @@ async axiosActions() {
       `${this.URL}?key=${this.API_KEY}&q=${this.query}&image_type=photo&safesearch=true&orientation=horizontal&page=${this.page}&per_page=40`
       );
       this.page += 1;
-  const promiseHits = await resaultPromise.data.hits ;
-  // console.log(promiseHits)
+  const promiseHits = await resaultPromise.data ;
+   console.log(promiseHits)
     return promiseHits
    
   }

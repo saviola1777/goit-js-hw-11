@@ -33,12 +33,12 @@ function onSubmit(e) {
  }
 
 function onLoadMore() {
-newsApiService.fetchActions().then(appendArticlesMarkup)
+newsApiService.axiosActions().then(appendArticlesMarkup)
   }
 
-function appendArticlesMarkup(hits) {
-  addRemoveButton(hits)
-  refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+function appendArticlesMarkup(data) {
+  addRemoveButton(data)
+  refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data));
   lightbox.refresh()
 }
 
@@ -46,7 +46,7 @@ function appendArticlesMarkup(hits) {
   refs.gallery.innerHTML = '';
 }
 
-function addRemoveButton(hits) {
-  hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
-  if (hits.length < 1) messageNothingFound();
+function addRemoveButton(data) {
+  data.hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
+  if (data.hits.length < 1) messageNothingFound();
   }
