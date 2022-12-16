@@ -11,7 +11,7 @@ const refs ={
   gallery: document.querySelector('.gallery'),
   loadMore:document.querySelector('.load-more'),
 }
-
+console.log(refs.loadMore.firstElementChild)
 const newsApiService = new NewsApiService();
 
 let lightbox = new SimpleLightbox('.gallery a' , {
@@ -29,10 +29,12 @@ function onSubmit(e) {
   newsApiService.resetPage()
   refs.gallery.innerHTML = '';
   refs.loadMore.setAttribute("disabled", true)
+  refs.loadMore.firstElementChild.classList.remove('is-hidden')
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
     if (data.hits.length >= 1) messagetotalHits(data.totalHits);
-    refs.loadMore.removeAttribute("disabled")
+    refs.loadMore.removeAttribute("disabled");
+    refs.loadMore.firstElementChild.classList.add('is-hidden')
   }) 
  }
 
@@ -51,6 +53,6 @@ function appendArticlesMarkup(data) {
 }
 
 function addRemoveButton(data) {
-  data.hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
+  data.hits.length === 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
   if (data.hits.length < 1) messageNothingFound();
 }
