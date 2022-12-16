@@ -28,11 +28,12 @@ function onSubmit(e) {
   if (newsApiService.query === '') return messageEmptyLine();
   newsApiService.resetPage()
   refs.gallery.innerHTML = '';
+  refs.loadMore.setAttribute("disabled", true)
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
     if (data.hits.length >= 1) messagetotalHits(data.totalHits);
-    refs.loadMore.setAttribute("disabled", true)
-  }).finally(() => refs.loadMore.removeAttribute("disabled")) 
+    refs.loadMore.removeAttribute("disabled")
+  }) 
  }
 
 function onClick() {
