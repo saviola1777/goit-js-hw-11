@@ -11,7 +11,7 @@ const refs ={
   gallery: document.querySelector('.gallery'),
   loadMore:document.querySelector('.load-more'),
 }
-console.log(refs.loadMore.firstElementChild)
+
 const newsApiService = new NewsApiService();
 
 let lightbox = new SimpleLightbox('.gallery a' , {
