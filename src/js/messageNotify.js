@@ -9,4 +9,8 @@ function messageNothingFound() {
  function messagetotalHits(totalHits) {
   Notify.success(`Hooray! We found ${totalHits} images.`);
 }
-export{messageEmptyLine,messageNothingFound,messagetotalHits}
+ function messageEndColection() {
+  Notify.info("We're sorry, but you've reached the end of search results.");
+}
+
+export { messageEmptyLine, messageNothingFound, messagetotalHits, messageEndColection };

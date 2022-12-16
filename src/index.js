@@ -1,4 +1,4 @@
-import { messageEmptyLine, messageNothingFound,messagetotalHits } from "./js/messageNotify.js";
+import { messageEmptyLine, messageNothingFound,messagetotalHits,messageEndColection} from "./js/messageNotify.js";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
@@ -20,7 +20,7 @@ let lightbox = new SimpleLightbox('.gallery a' , {
 });
 
 refs.form.addEventListener('submit', onSubmit)
-refs.loadMore.addEventListener('click', onLoadMore)
+refs.loadMore.addEventListener('click', onClick)
 
 function onSubmit(e) {
   e.preventDefault();
@@ -34,8 +34,11 @@ function onSubmit(e) {
   })
  }
 
-function onLoadMore() {
-  newsApiService.axiosActions().then(appendArticlesMarkup)
+function onClick() {
+  newsApiService.axiosActions().then(data => {
+    appendArticlesMarkup(data);
+    if (data.hits.length < 40) messageEndColection();
+  })
   }
 
 function appendArticlesMarkup(data) {
@@ -47,5 +50,4 @@ function appendArticlesMarkup(data) {
 function addRemoveButton(data) {
   data.hits.length >= 40 ? refs.loadMore.classList.remove('is-hidden') : refs.loadMore.classList.add('is-hidden')
   if (data.hits.length < 1) messageNothingFound();
-
-  }
+}
