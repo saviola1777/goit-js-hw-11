@@ -31,13 +31,15 @@ function onSubmit(e) {
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
     if (data.hits.length >= 1) messagetotalHits(data.totalHits);
-  })
+    refs.loadMore.setAttribute("disabled", true)
+  }).finally(() => refs.loadMore.removeAttribute("disabled")) 
  }
 
 function onClick() {
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
     if (data.hits.length < 40) messageEndColection();
+
   })
   }
 
