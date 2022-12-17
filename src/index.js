@@ -1,7 +1,6 @@
 import { messageEmptyLine, messageNothingFound,messagetotalHits,messageEndColection} from "./js/messageNotify.js";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-
 import NewsApiService from './js/new-service.js'
 import { createMarkup } from "./js/card-marking.js"
 
@@ -42,7 +41,6 @@ function onClick() {
   newsApiService.axiosActions().then(data => {
     appendArticlesMarkup(data);
     if (data.hits.length < 40) messageEndColection();
-
   })
   }
 
